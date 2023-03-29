@@ -4,9 +4,9 @@ const { dependencies } = require('./package.json')
 
 module.exports = {
   node: false,
-  entry: './src/main.js',
+  entry: './src/index',
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx', '.json', '.ts', '.tsx']
   },
   module: {
     rules: [
@@ -23,6 +23,11 @@ module.exports = {
         },
       },
       { test: /\.css$/, use: { loader: 'css-loader', options: { modules: true } } },
+      {
+        test: /\.tsx?$/,
+        exclude: /node_modules/,
+        loader: 'ts-loader'
+      }
     ]
   },
   plugins: [
@@ -31,12 +36,11 @@ module.exports = {
       name: 'library1',
       filename: 'remoteEntry.js',
       exposes: {
-        './HelloWorld': './src/components/HelloWorld.jsx'
+        './HelloWorld': './src/components/HelloWorld.tsx'
       },
       shared: dependencies,
     })
   ],
-
   devServer: {
     port: 8081,
     headers: {
