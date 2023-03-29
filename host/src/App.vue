@@ -11,7 +11,7 @@
 import { defineAsyncComponent } from 'vue'
 import Loading from './components/Loading.vue'
 import Error from './components/Error.vue'
-import { defineReactComponent } from './react'
+import { defineReactComponent } from './reactConfig.ts'
 
 function defineFederatedReactComponent({
   loader = async () => ({ default: null }),
