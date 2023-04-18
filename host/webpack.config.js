@@ -39,4 +39,8 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: false,
     })
   ],
+  devServer: {
+    port: 8080,
+    historyApiFallback: true,
+  },
 }

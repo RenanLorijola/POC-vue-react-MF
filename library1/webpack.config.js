@@ -36,7 +36,8 @@ module.exports = {
       name: 'library1',
       filename: 'remoteEntry.js',
       exposes: {
-        './HelloWorld': './src/components/HelloWorld.tsx'
+        './HelloWorld': './src/components/HelloWorld.tsx',
+        './Test': './src/components/Test.tsx',
       },
       shared: dependencies,
     })

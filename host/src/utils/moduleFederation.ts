@@ -1,14 +1,31 @@
-import { h } from "vue";
-
+import { defineAsyncComponent, h } from 'vue'
+import Loading from '../components/Loading.vue'
+import Error from '../components/Error.vue'
 import React from "react";
 import ReactDOM from "react-dom/client";
+
+export function defineFederatedReactComponent({
+    loader = async () => ({ default: null }),
+    component = 'default',
+    ...options
+  }: any = {}) {
+    return defineAsyncComponent({
+      loader: async () => defineReactComponent({
+        component: (await loader() as any)[component],
+        ...options
+      }),
+      loadingComponent: Loading,
+      errorComponent: Error,
+      timeout: 1000,
+    })
+  }
+
+
 
 export function defineReactComponent({
   component,
   ...options
-}: {
-  component: Parameters<typeof React.createElement>[0];
-}) {
+}: any) {
   return {
     ...options,
     setup(props: React.Attributes) {
